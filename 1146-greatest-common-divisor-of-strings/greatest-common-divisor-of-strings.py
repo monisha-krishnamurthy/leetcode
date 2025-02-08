@@ -9,9 +9,10 @@ class Solution:
             return ""
             
         length = gcd(len(str1), len(str2))
-        if length !=0:
-            return str1[:length]
-        else:
-            return ""
+        return str1[:length]
+        # if length !=0:
+        #     return str1[:length]
+        # else:
+        #     return ""
 
     
