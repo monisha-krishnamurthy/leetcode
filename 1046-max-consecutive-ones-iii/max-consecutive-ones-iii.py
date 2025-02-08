@@ -12,6 +12,7 @@ class Solution:
 
         while(right<len(nums)):
             if nums[right]==0:
+                zero_index_q.append(right) 
                 if original_k != 0: 
                     if (k==0):
                         zero_index = zero_index_q.popleft()
@@ -20,7 +21,6 @@ class Solution:
                     else:
                         k -= 1
                         count+=1
-                    zero_index_q.append(right)
                 else:
                     count=0
             else:
