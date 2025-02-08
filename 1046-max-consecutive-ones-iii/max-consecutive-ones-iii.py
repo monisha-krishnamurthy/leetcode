@@ -1,8 +1,8 @@
 from collections import deque
 class Solution:
     def longestOnes(self, nums: List[int], k: int) -> int:
-        if len(nums) == 1 and k>0:
-            return 1
+        # if len(nums) == 1 and k>0:
+        #     return 1
         
         count, max_count = 0, 0
         original_k = k
