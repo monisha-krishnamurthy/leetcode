@@ -9,13 +9,15 @@ class StockSpanner:
         # print(self.prices)
         # print(self.stack)
         result = 1
-        while self.stack and self.prices[self.stack[-1]] <= price:
-            ele = self.stack.pop()
         
-        if self.stack:
-            result = len(self.prices)-self.stack[-1]-1
-        else:
-            result = len(self.prices)
+        price_ele_index = len(self.prices)-1
+        while self.stack and self.prices[self.stack[-1]] <= price:
+            self.stack.pop()   
+            if self.stack:
+                top_ele_index = self.stack[-1]
+                result = price_ele_index - top_ele_index
+            else:
+                result = len(self.prices)
         
         self.stack.append(len(self.prices)-1)
         # print(self.stack)
