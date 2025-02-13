@@ -13,22 +13,17 @@ class Solution:
         nodes_map = {node:i for i,node in enumerate(nodes)}
         adj_matrix = [[0]*length for i in range(length)]
         for i in range(length):
-            print(i)
             adj_matrix[i][i] = 1
-        print(adj_matrix)
+
 
         for i,eq in enumerate(equations):
             value = values[i]
-            print(value, " value")
-            print(nodes_map[eq[0]], nodes_map[eq[1]], "nodes_map of eq[0] and eq[1]")
             adj_matrix[nodes_map[eq[0]]][nodes_map[eq[1]]] = value
             adj_matrix[nodes_map[eq[1]]][nodes_map[eq[0]]] = 1/value
-        print(adj_matrix)
 
         answer = [0]*len(queries)
         for i in range(len(queries)):
             visited = [False for i in range(len(nodes))] 
-            print(visited, "visited~~~~~~")
             if queries[i][0] not in nodes or queries[i][1] not in nodes:
                 answer[i] = -1
                 continue
@@ -55,7 +50,7 @@ class Solution:
                     intermediate_val = val * n
                     break
                 else:
-                    intermediate_val = self.recursive(i, target_index, visited, adj_matrix,  val*n)
+                    intermediate_val = self.recursive(i, target_index, visited, adj_matrix, val*n)
                     if intermediate_val != -1:
                         break
         return intermediate_val
