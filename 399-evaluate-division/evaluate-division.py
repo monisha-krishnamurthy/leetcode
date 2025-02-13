@@ -48,11 +48,13 @@ class Solution:
         visited[source_index] = True 
         neighbors = adj_matrix[source_index] 
         intermediate_val = -1
-        if neighbors[target_index] != 0:
-            intermediate_val = val * neighbors[target_index] 
-        else:
-            for i,n in enumerate(neighbors):
-                if n != 0 and visited[i] == False:
+         
+        for i,n in enumerate(neighbors):
+            if n != 0 and visited[i] == False:
+                if i == target_index:
+                    intermediate_val = val * n
+                    break
+                else:
                     intermediate_val = self.recursive(i, target_index, visited, adj_matrix,  val*n)
                     if intermediate_val != -1:
                         break
