@@ -5,16 +5,21 @@ class Solution:
 
         if digits == "":
             return []
-        def generate_combination(n, digits, output_list, output=""):
-            if n == len(digits):  # Base case: When the required length is achieved
+        def generate_combination(index, digits, output_list, output=""):
+            if index == len(digits):  # Base case: When the required length is achieved
                 print(output)
                 output_list.append(output) 
                 return
-
-            # Include '0' and recurse
-            digit = digits[n] 
-            for s in digits_map[int(digit)]:
-                generate_combination(n+1, digits, output_list, output + s)
+        
+            digit = digits[index] 
+            for char in digits_map[int(digit)]:
+                generate_combination(index+1, digits, output_list, output + char)
+            # generate_combination(1, digits, output_list, a)
+            #     generate_combination(2, digits, output_list, ad)
+            #     generate_combination(2, digits, output_list, ae)
+            #     generate_combination(2, digits, output_list, af)
+            # generate_combination(1, digits, output_list, b)
+            # generate_combination(1, digits, output_list, c) 
 
         output_list = []
         generate_combination(0, digits, output_list, output="")
