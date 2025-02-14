@@ -5,7 +5,7 @@ class Solution:
 
         if digits == "":
             return []
-        def generate_binary(n, digits, output_list, output=""):
+        def generate_combination(n, digits, output_list, output=""):
             if n == len(digits):  # Base case: When the required length is achieved
                 print(output)
                 output_list.append(output) 
@@ -14,8 +14,8 @@ class Solution:
             # Include '0' and recurse
             digit = digits[n] 
             for s in digits_map[int(digit)]:
-                generate_binary(n+1, digits, output_list, output + s)
+                generate_combination(n+1, digits, output_list, output + s)
 
         output_list = []
-        generate_binary(0, digits, output_list, output="")
+        generate_combination(0, digits, output_list, output="")
         return output_list 
