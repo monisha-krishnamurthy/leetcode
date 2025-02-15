@@ -18,5 +18,5 @@ class Solution:
 
         output_list = []
         combinations(k, n, 0, digits, output_list)
-        return list(output_list)
+        return output_list
             
