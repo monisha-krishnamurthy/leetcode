@@ -17,6 +17,6 @@ class Solution:
                     combinations(k-1, n-digit, index+1, digits, output_list, output+[digit])
 
         output_list = []
-        combinations(k, n, 0, digits, output_list)
+        combinations(k, n, 0, digits, output_list, [])
         return output_list
             
