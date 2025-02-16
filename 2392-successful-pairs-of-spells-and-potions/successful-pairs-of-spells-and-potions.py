@@ -11,15 +11,11 @@ class Solution:
             left = 0
             right = len(potions)-1
             while left<=right:
-                mid = left+(right-left)//2
+                mid = (left+right)//2
                 if potions[mid] < div:
                     left = mid+1
                 elif potions[mid] == div:
                     pairs[i] = len(potions)-mid
-                    # while mid-1>=0 and potions[mid-1] == div:
-                    #     mid = mid-1 
-                    #     pairs[i] +=1
-                    # break
                     right = mid-1
                 elif potions[mid] > div:
                     pairs[i] = len(potions)-mid
