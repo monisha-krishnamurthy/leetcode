@@ -8,19 +8,21 @@ class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if root is None:
             return 0
-        def recursive(root, max_depth, depth):
+
+        max_depth = 0 
+        def recursive(root, depth):
+            nonlocal max_depth
             if root.right == None and root.left == None:
-                max_depth[0] = max(max_depth[0], depth)
+                max_depth = max(max_depth, depth)
                 return 
 
             if root.left != None:
-                recursive(root.left, max_depth, depth+1)
+                recursive(root.left, depth+1)
                 print(max_depth, "root.left")
 
             if root.right != None:
-                recursive(root.right, max_depth, depth+1)
+                recursive(root.right, depth+1)
                 print(max_depth, "root.right")
-        
-        max_depth =[0]
-        recursive(root, max_depth, 1)
-        return max_depth[0]
+
+        recursive(root, 1)
+        return max_depth
