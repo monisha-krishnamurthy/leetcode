@@ -14,10 +14,11 @@ class Solution:
                 return 
             
             if root.val >= max_value:
+                max_value = root.val
                 good_nodes +=1
  
-            recursive(root.left, max(max_value, root.val))
-            recursive(root.right, max(max_value, root.val))
+            recursive(root.left, max_value)
+            recursive(root.right, max_value)
 
         recursive(root, float('-inf'))
         return good_nodes
