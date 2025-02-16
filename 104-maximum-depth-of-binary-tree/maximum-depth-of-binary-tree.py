@@ -12,5 +12,4 @@ class Solution:
         left = self.maxDepth(root.left)
         right = self.maxDepth(root.right)
 
-        ans = max(left,right)
-        return ans+1
+        return max(left,right)+1
