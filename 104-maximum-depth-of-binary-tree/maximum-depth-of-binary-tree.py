@@ -12,17 +12,12 @@ class Solution:
         max_depth = 0 
         def recursive(root, depth):
             nonlocal max_depth
-            if root.right == None and root.left == None:
-                max_depth = max(max_depth, depth)
+            if root== None:
                 return 
 
-            if root.left != None:
-                recursive(root.left, depth+1)
-                print(max_depth, "root.left")
-
-            if root.right != None:
-                recursive(root.right, depth+1)
-                print(max_depth, "root.right")
+            max_depth = max(max_depth, depth)
+            recursive(root.left, depth+1)
+            recursive(root.right, depth+1)
 
         recursive(root, 1)
         return max_depth
