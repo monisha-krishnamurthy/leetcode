@@ -9,15 +9,9 @@ class Solution:
         if root is None:
             return 0
 
-        max_depth = 0 
-        def recursive(root, depth):
-            nonlocal max_depth
-            if root== None:
-                return 
+        left, right = 0, 0
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
 
-            max_depth = max(max_depth, depth)
-            recursive(root.left, depth+1)
-            recursive(root.right, depth+1)
-
-        recursive(root, 1)
-        return max_depth
+        ans = max(left,right)
+        return ans+1
