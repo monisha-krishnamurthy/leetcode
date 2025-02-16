@@ -4,7 +4,7 @@ class Solution:
         pairs = [0]*len(spells)
         potions.sort()
         for i,spell in enumerate(spells):
-            div = math.ceil(success/spell)
+            div = success//spell if success%spell==0 else success//spell+1
             # index = bisect.bisect_left(potions, div)
             # pairs[i] = len(potions) - index
 
@@ -17,5 +17,5 @@ class Solution:
                 else:
                     pairs[i] = len(potions)-mid
                     right = mid-1
-                    
+
         return pairs
