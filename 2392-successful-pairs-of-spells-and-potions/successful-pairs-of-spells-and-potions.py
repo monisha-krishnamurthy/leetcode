@@ -14,11 +14,8 @@ class Solution:
                 mid = (left+right)//2
                 if potions[mid] < div:
                     left = mid+1
-                elif potions[mid] == div:
+                else:
                     pairs[i] = len(potions)-mid
                     right = mid-1
-                elif potions[mid] > div:
-                    pairs[i] = len(potions)-mid
-                    right = mid-1 
-        
+                    
         return pairs
