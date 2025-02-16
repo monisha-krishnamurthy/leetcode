@@ -18,10 +18,7 @@ class Solution:
                 good_nodes +=1
  
             recursive(root.left, max_value)
-            print(good_nodes, "1st")
-
             recursive(root.right, max_value)
-            print(good_nodes, "2nd")
 
         recursive(root, float('-inf'))
         return good_nodes
