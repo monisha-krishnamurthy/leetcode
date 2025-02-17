@@ -31,7 +31,7 @@ class Solution:
                     count +=1
                     print(count, "2nd")
                     continue
-            if len(flowerbed)>2 and (flowerbed[-1] ==0 and flowerbed[-2]==0):
+            if flowerbed[-1] ==0 and flowerbed[-2]==0:
                 count +=1
                 flowerbed[-1] = 1
                 print(flowerbed)
