@@ -8,9 +8,6 @@ class Solution:
         for index in range(len(costs)-1, len(costs)-1-candidates, -1):
             heapq.heappush(heap2, (costs[index], index))
             right_index = index
-        print(heap1, "heap1------------------")
-        print(heap2, "heap2------------------")
-        print(left_index, right_index)
         
         cost = 0
         for i in range(k):
@@ -22,7 +19,6 @@ class Solution:
                 ele2 = float('inf')
             else:
                 ele2, index2 = heap2[0]
-            print(ele1, ele2, "ele1, ele2")
             if ele1 > ele2:
                 heapq.heappop(heap2)
                 cost += ele2
@@ -39,8 +35,6 @@ class Solution:
                 if index1 < index2:
                     heapq.heappop(heap1)
                     cost += ele1
-                    print(left_index, right_index, "after 32")
-                    print(len(heap1))
                     if len(heap1) < candidates and left_index < right_index - 1:
                         heapq.heappush(heap1, (costs[left_index + 1], left_index + 1))
                         left_index = left_index + 1
