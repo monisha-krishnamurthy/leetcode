@@ -8,15 +8,16 @@ class Solution:
             temp = []
             for row_i in range(m):
                 temp.append(grid[row_i][col_i])
-            if tuple(temp) in hashmap:
-                hashmap[tuple(temp)] +=1
+            temp = tuple(temp)
+            if temp in hashmap:
+                hashmap[temp] +=1
             else: 
-                hashmap[tuple(temp)] = 1
-        print(hashmap)
+                hashmap[temp] = 1
 
         for row_i in range(m):
             row = grid[row_i]
-            if tuple(row) in hashmap:
-                pairs = pairs + hashmap[tuple(row)]
+            row = tuple(row)
+            if row in hashmap:
+                pairs = pairs + hashmap[row]
 
         return pairs
