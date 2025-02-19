@@ -6,7 +6,7 @@ class Solution:
                 hours += math.ceil(pile/rate)
             return hours
 
-        low = max(sum(piles)//h,1)
+        low = 1
         high = max(piles)
         
         while(low < high):
