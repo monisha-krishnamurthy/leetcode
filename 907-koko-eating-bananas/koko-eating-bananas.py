@@ -1,24 +1,23 @@
-import math
-from typing import List
-
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         def get_hours(piles, rate):
             hours = 0
             for pile in piles:
-                hours += math.ceil(pile / rate)  # Compute total hours needed
+                hours += math.ceil(pile/rate)
             return hours
 
-        low = 1  # ✅ Minimum possible eating speed
-        high = max(piles)  # ✅ Maximum pile size (max eating speed)
+        low = max(sum(piles)//h,1)
+        high = max(piles)
         
-        while low < high:
-            mid = (low + high) // 2
+        while(low<=high):
+            mid = (low+high)//2
             hours = get_hours(piles, mid)
 
             if hours > h:
-                low = mid + 1  # Increase speed
+                low = mid + 1
             else:
-                high = mid  # ✅ Instead of `mid - 1`, shrink search space properly
+                high = mid - 1   
+            
+        return low
+
         
-        return low  # ✅ `low` now holds the minimum valid eating speed
