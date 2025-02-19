@@ -9,15 +9,18 @@ class Solution:
         low = max(sum(piles)//h,1)
         high = max(piles)
         
-        while(low<=high):
+        while(low < high):
             mid = (low+high)//2
             hours = get_hours(piles, mid)
 
             if hours > h:
                 low = mid + 1
             else:
-                high = mid - 1   
+                high = mid  
             
         return low
+
+
+
 
         
