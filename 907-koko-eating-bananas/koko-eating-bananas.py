@@ -18,7 +18,7 @@ class Solution:
             else:
                 high = mid  
             
-        return high
+        return low
 
 
 
