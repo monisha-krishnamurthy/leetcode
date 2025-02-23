@@ -10,13 +10,14 @@ from collections import deque
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':  
         def recursive(node, node_search):
+            if node is None: 
+                return []
             if node.val == node_search.val:
                 return [node]
 
-            path1, path2 = [], []
-            if node.left is not None:
-                path1 = recursive(node.left, node_search)
-            if len(path1)== 0 and node.right is not None:
+            path2 =  []
+            path1 = recursive(node.left, node_search)
+            if len(path1)== 0:
                 path2 = recursive(node.right, node_search) 
             if not path1 and not path2:
                 return []
