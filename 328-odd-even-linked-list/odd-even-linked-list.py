@@ -11,18 +11,18 @@ class Solution:
         odd = head
         even = head.next
         temp = head.next
-        while True:
+        while even and even.next != None:
             odd.next = even.next
-            if odd.next is None:
-                odd.next = temp
-                break
+            # if odd.next is None:
+            #     odd.next = temp
+            #     break
             odd = odd.next
             even.next = odd.next
-            if even.next is None:
-                odd.next = temp
-                break
+            # if even.next is None:
+            #     odd.next = temp
+            #     break
             even = even.next
-        
+        odd.next = temp
         return head
         
             
