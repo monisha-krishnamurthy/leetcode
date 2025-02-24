@@ -11,14 +11,14 @@ class Solution:
         if root is None:
             return []
 
-        out = defaultdict(list)
+        # out = defaultdict(list)
         levels = set()
         output = []
         queue = deque()
         queue.append((root, 0))
         while queue:
             node, level = queue.popleft()
-            out[level].append(node.val)
+            # out[level].append(node.val)
             if level in levels:
                 output[level] = node.val
             else:
