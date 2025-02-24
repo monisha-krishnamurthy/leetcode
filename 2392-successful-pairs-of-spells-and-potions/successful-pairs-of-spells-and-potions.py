@@ -5,8 +5,6 @@ class Solution:
         potions.sort()
         for i,spell in enumerate(spells):
             div = success//spell if success%spell==0 else success//spell+1
-            # index = bisect.bisect_left(potions, div)
-            # pairs[i] = len(potions) - index
 
             left = 0
             right = len(potions)-1
