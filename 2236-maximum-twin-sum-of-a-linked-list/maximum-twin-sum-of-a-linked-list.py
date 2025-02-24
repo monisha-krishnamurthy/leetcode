@@ -5,22 +5,26 @@
 #         self.next = next
 class Solution:
     def pairSum(self, head: Optional[ListNode]) -> int:
-        length = 0
-        temp = head
-        while temp != None:
-            length +=1
-            temp = temp.next
-        
-        map_twin = dict()
+        slow = head
+        fast = head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        prev = None
+        curr = slow
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+
         max_sum = 0
-        temp = head
-        index = 0
-        while temp != None:
-            if length-index-1 in map_twin:
-                map_twin[length-index-1] += temp.val
-                max_sum = max(max_sum, map_twin[length-index-1])
-            else:
-                map_twin[index] = temp.val
-            index +=1
-            temp = temp.next
+        while prev:
+            summ = head.val + prev.val
+            max_sum = max(max_sum, summ)
+            head = head.next
+            prev = prev.next
+
         return max_sum
