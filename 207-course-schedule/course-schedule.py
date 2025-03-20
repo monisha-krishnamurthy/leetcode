@@ -28,7 +28,7 @@ class Solution:
             if neighbor not in visited:
                 if self.recursive(neighbor, adj_list, visited, recstack):
                     return True
-            elif neighbor in recstack:
+            if neighbor in recstack:
                 return True
     
         recstack.remove(node)
