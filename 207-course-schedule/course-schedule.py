@@ -25,9 +25,10 @@ class Solution:
         recstack.add(node)
 
         for neighbor in adj_list[node]:
-            if neighbor not in visited:
-                if self.recursive(neighbor, adj_list, visited, recstack):
+            
+            if neighbor not in visited and self.recursive(neighbor, adj_list, visited, recstack):
                     return True
+            
             if neighbor in recstack:
                 return True
     
