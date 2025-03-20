@@ -11,7 +11,6 @@ class Solution:
                 adj_list[node].append(neighbor)
             if neighbor not in adj_list:
                 adj_list[neighbor] = [] 
-        print(adj_list)
         
         visited = set()
         recstack = set()
