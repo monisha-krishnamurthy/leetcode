@@ -21,12 +21,10 @@ class Solution:
                 queue.append((node.left, level+1))
             if node.right is not None:
                 queue.append((node.right, level+1))
-        print(output)
         
         result = []
         for i in range(len(output)):
             if i%2 != 0:
                 output[i] = output[i][::-1]
             result.append(output[i])
-        print(result)
         return result
