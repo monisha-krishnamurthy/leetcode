@@ -1,6 +1,15 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        sorted_s = sorted(s)
-        sorted_t = sorted(t)
+        # dict() vs defaultdict(): explicit control over missing keys Vs cleaner code w/o manual checks
+        mapping = defaultdict(int) 
 
-        return sorted_s == sorted_t
+        for char in s:
+            mapping[char] += 1
+        
+        for char in t:
+            mapping[char] -= 1
+
+        for values in mapping.values():
+            if values != 0:
+                return False
+        return True
