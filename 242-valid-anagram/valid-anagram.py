@@ -4,10 +4,10 @@ class Solution:
         mapping = defaultdict(int) 
 
         for char in s:
-            mapping[char] += 1
+            mapping[ord(char) - ord('a')] += 1
         
         for char in t:
-            mapping[char] -= 1
+            mapping[ord(char) - ord('a')] -= 1
 
         for values in mapping.values():
             if values != 0:
