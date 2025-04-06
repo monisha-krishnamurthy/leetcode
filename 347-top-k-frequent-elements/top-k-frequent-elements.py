@@ -4,11 +4,11 @@ class Solution:
         for ele in nums:
             freq_map[ele] += 1
         
-        pair_list = list()
-        for key,val in freq_map.items():
-            pair_list.append((key,val))
+        # pair_list = list()
+        # for key,val in freq_map.items():
+        #     pair_list.append((key,val))
 
-        sorted_list = sorted(pair_list, key=lambda x:x[1], reverse = True) 
+        sorted_list = sorted(freq_map.items(), key=lambda x:x[1], reverse = True) 
 
         output = list()
         for i in range(k):
