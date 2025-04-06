@@ -5,7 +5,5 @@ class Solution:
         for i, num in enumerate(nums):
             complement = target - num
             if complement in map_nums:
-                output.append(i)
-                output.append(map_nums[complement])
+                return [map_nums[complement], i]
             map_nums[num] = i 
-        return output
