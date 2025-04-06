@@ -1,6 +1,6 @@
 class Solution:
     import heapq
-    # USING FREQ MAP
+    # USING FREQ MAP & MAX-HEAP
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         freq_map = defaultdict(int)
         for num in nums:
@@ -8,8 +8,9 @@ class Solution:
 
         heap = list()
         for key,val in freq_map.items():
+            # push elements with max value first to arrange from high to low
+            # if not, will arrange from low to high because by default it is a min-heap
             heapq.heappush(heap, (-val, key))
-        print(heap)
 
         output = list()
         for i in range(k):
