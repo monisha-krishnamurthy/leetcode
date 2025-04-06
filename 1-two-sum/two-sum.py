@@ -1,12 +1,19 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        map_nums = dict()
-
+        A = []
         for i, num in enumerate(nums):
-            map_nums[num] = i
+            A.append([num, i])
 
-        for i, num in enumerate(nums):
-            difference = target - num
-            if difference in map_nums and map_nums[difference] != i:
-                return [i, map_nums[difference]]
-            map_nums[num] = i 
+        A.sort()
+        i = 0
+        j = len(nums) - 1
+        while i < j:
+            summ = A[i][0] + A[j][0]
+            if summ == target:
+                return (min(A[i][1], A[j][1]), max(A[i][1], A[j][1]))
+            elif summ > target :
+                j -= 1
+            else:
+                i += 1
+        return []
+
