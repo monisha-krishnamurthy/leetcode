@@ -1,38 +1,23 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        # using brute force approach
-        for row in range(9):
-            seen = set()
-            for i in range(9):
-                if board[row][i] == ".":
-                    continue
-                if board[row][i] in seen:
-                    return False
-                seen.add(board[row][i])
+        # using hash set (one-pass)
+        row = defaultdict(set)
+        col = defaultdict(set)
+        square = defaultdict(set)
 
-            
-        for col in range(9):
-            seen = set()
-            for i in range(9):
-                if board[i][col] == ".":
+        for r in range(9):
+            for c in range(9):
+                if board[r][c] == ".":
                     continue
-                if board[i][col] in seen:
+                if (board[r][c] in row[r]  
+                    or board[r][c] in col[c]  
+                    or board[r][c] in square[(r//3), (c//3)]):
                     return False
-                seen.add(board[i][col])
-
-        for square in range(9):
-            seen = set()
-            for i in range(3):
-                for j in range(3):
-                    row = (square // 3) * 3 + i
-                    col = (square % 3) * 3 + j
-                    if board[row][col] == ".":
-                        continue
-                    if board[row][col] in seen:
-                        return False
-                    seen.add(board[row][col])
+                
+                row[r].add(board[r][c])
+                col[c].add(board[r][c])
+                square[(r//3,c//3)].add(board[r][c])
         return True
+# TIME COMPLEXITY: O(n^2)
+# SPACE COMPLEXITY: O(n^2)
 
-
-
-    
