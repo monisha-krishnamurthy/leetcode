@@ -11,3 +11,4 @@ class Solution:
                 right -= 1
             else:
                 return [left+1, right+1]
+        return []
