@@ -4,7 +4,7 @@ class Solution:
             l, r = i + 1, len(numbers)-1
             search = target - numbers[i]
             while l <= r:
-                mid = l + (r-l)//2
+                mid = (l + r)//2
                 if numbers[mid] == search:
                     return [i+1, mid+1] 
                 elif numbers[mid] > search:
