@@ -6,8 +6,8 @@ class Solution:
                 output.append(out)
                 return 
 
-            backtracking(current_index+1, out)
-            backtracking(current_index+1, out + [nums[current_index]])
+            backtracking(current_index + 1, out)
+            backtracking(current_index + 1, out + [nums[current_index]])
 
         backtracking(0, [])
         return output
