@@ -16,7 +16,7 @@ class Solution:
         
         output = 0
         for i in range(len(height)):
-            out = max(0, min(max_front[i], max_back[i]) - height[i])
+            out = min(max_front[i], max_back[i]) - height[i]
             output += out
         return output
          
