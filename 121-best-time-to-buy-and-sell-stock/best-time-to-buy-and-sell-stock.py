@@ -1,16 +1,14 @@
 class Solution:
-    #USING TWO-POINTERS
+    #USING DYNAMIC PROGRAMMING
     def maxProfit(self, prices: List[int]) -> int:
-        l, r = 0, 1
         max_profit = 0
+        minBuy = prices[0]
 
-        while r < len(prices):
-            if prices[l] < prices[r]:
-                profit = prices[r] - prices[l]
-                max_profit = max(max_profit, profit)
-            else:
-                l = r
-            r += 1
+        #same logic as the sliding window solution
+        for i in range(len(prices)):
+            max_profit = max(max_profit, prices[i]-minBuy)
+            minBuy = min(minBuy, prices[i])        
         return max_profit
 #TIME-COMPLEXITY: O(n)
 #SPACE-COMPLEXITY: O(1)
+
