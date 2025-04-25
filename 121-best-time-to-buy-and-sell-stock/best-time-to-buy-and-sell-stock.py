@@ -1,12 +1,16 @@
-import sys
-
 class Solution:
+    #USING TWO-POINTERS
     def maxProfit(self, prices: List[int]) -> int:
+        l, r = 0, 1
         max_profit = 0
-        minimum = sys.maxsize
-        for i in range(len(prices)):
-            if prices[i] < minimum:
-                minimum = prices[i]
-            profit = prices[i] - minimum
-            max_profit = max(max_profit, profit)
+
+        while r < len(prices):
+            if prices[l] < prices[r]:
+                profit = prices[r] - prices[l]
+                max_profit = max(max_profit, profit)
+            else:
+                l = r
+            r += 1
         return max_profit
+#TIME-COMPLEXITY: O(n)
+#SPACE-COMPLEXITY: O(1)
