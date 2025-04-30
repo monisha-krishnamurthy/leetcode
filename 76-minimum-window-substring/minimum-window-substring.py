@@ -4,7 +4,7 @@ class Solution:
         if len(t) > len(s):
             return ""
 
-        freq_t, window = defaultdict(int), defaultdict(int)
+        freq_t, window = defaultdict(int), dict()
         for ch in t:
             freq_t[ch] += 1
         print(freq_t)
@@ -14,7 +14,7 @@ class Solution:
         minLength, minIndex = float("inf"), [-1, -1]
         for r in range(len(s)):
             ch = s[r]
-            window[ch] += 1
+            window[ch] = 1 + window.get(ch, 0)
 
             if ch in freq_t and window[ch] == freq_t[ch]:
                 have += 1
@@ -29,6 +29,6 @@ class Solution:
                 l += 1
         l, r = minIndex
         return s[l : r + 1] if minLength < float("infinity") else ""
-
+        
 #TIME-COMPLEXITY: O(N)
 #SPACE-COMPLEXITY: O(M)
