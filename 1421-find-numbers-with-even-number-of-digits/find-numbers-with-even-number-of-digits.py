@@ -1,15 +1,8 @@
 class Solution:
     def findNumbers(self, nums: List[int]) -> int:
-        result = 0
+        count = 0
         for num in nums:
-            if self.count_digits(num) % 2 == 0:
-                result += 1
-        return result
-    
-    def count_digits(self, number: int) -> int:
-        digits = 0
-        while number > 0:
-            number = number // 10
-            digits += 1
-        return digits
-
+            str_num = str(num)
+            if len(str_num) % 2 == 0:
+                    count = count + 1
+        return count
