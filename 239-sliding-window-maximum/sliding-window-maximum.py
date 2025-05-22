@@ -2,7 +2,7 @@ from collections import deque
 
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        #USING MONOTONIC DEQUE 
+        #USING MONOTONIC DEQUE (double sided queue)
         result = list()
 
         main_q = deque() 
@@ -26,7 +26,7 @@ class Solution:
             max_q.append(new_back_ele)
             result.append(max_q[0])
         return result
-#TIME-COMPLEXITY: O(n*logk) 
-#SPACE-COMPLEXITY: O(n-k+1+k) = (n+1) i.e., the no. of windows 
+#TIME-COMPLEXITY: O(n) 
+#SPACE-COMPLEXITY: O(k) 
 
 
