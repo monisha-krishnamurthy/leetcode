@@ -1,19 +1,25 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        output_list = []
-        self.recursive(n, 0, "", output_list)
-        return output_list
+        stack = []
+        res = []
 
-    def recursive(self, no_of_pairs, brackets_to_be_closed, output, output_list):
-        if no_of_pairs == 0 and brackets_to_be_closed == 0:
-            output_list.append(output)
-            return 
+        def backtracking(open_count, closed_count):
+            if open_count == closed_count == n:
+                res.append("".join(stack))
+                return
 
-        if brackets_to_be_closed != 0:
-            self.recursive(no_of_pairs, brackets_to_be_closed - 1, output + ")", output_list)
-        if no_of_pairs != 0:
-            self.recursive(no_of_pairs-1, brackets_to_be_closed + 1, output + "(", output_list)
-        # if no_of_pairs != 0 and brackets_to_be_closed != 0:
-        #     self.recursive(no_of_pairs - 1, brackets_to_be_closed + 1, output + "(", output_list)
-        #     self.recursive(no_of_pairs, brackets_to_be_closed - 1, output + ")", output_list) 
+            if open_count < n:
+                stack.append("(")
+                backtracking(open_count+1, closed_count)
+                stack.pop()
+            
+            if closed_count < open_count:
+                stack.append(")")
+                backtracking(open_count, closed_count+1)
+                stack.pop() 
 
+        backtracking(0,0)
+        return res
+
+    
+        
