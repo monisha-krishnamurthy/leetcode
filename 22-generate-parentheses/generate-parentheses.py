@@ -1,25 +1,13 @@
 class Solution:
-    def generateParenthesis(self, n: int) -> List[str]:
-        stack = []
-        res = []
-
-        def backtracking(open_count, closed_count):
-            if open_count == closed_count == n:
-                res.append("".join(stack))
-                return
-
-            if open_count < n:
-                stack.append("(")
-                backtracking(open_count+1, closed_count)
-                stack.pop()
-            
-            if closed_count < open_count:
-                stack.append(")")
-                backtracking(open_count, closed_count+1)
-                stack.pop() 
-
-        backtracking(0,0)
-        return res
-
-    
+    def generateParenthesis(self, n):
+        res = [[] for _ in range(n+1)]
+        res[0] = [""]
         
+        for k in range(n + 1):
+            for i in range(k):
+                for left in res[i]:
+                    for right in res[k-i-1]:
+                        res[k].append("(" + left + ")" + right)
+        
+        print(res)
+        return res[-1] 
