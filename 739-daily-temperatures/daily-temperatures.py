@@ -1,16 +1,21 @@
 class Solution:
-    #USING STACK
+    #USING DYNAMIC PROGRAMMING
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        result = [0]*len(temperatures)
-        stack = []
+        res = [0]*len(temperatures)
+        n = len(temperatures)
 
-        for i, temp in enumerate(temperatures):
-            while stack and temp > stack[-1][0]:
-                stack_val, stack_index = stack.pop()
-                result[stack_index] = i - stack_index
-            stack.append((temp, i))                
-        return result
-#TIME-COMPLEXITY: O(n^2)
+        for i in range(n-2, -1, -1):
+            j = i + 1
+            while j<n and temperatures[j] <= temperatures[i]:
+                if res[j] == 0:
+                    j = n
+                    break
+                j += res[j]
+
+            if j < n:
+                res[i] = j - i
+        return res
+#TIME-COMPLEXITY: O(n)
 #SPACE-COMPLEXITY: O(n)
 
 
