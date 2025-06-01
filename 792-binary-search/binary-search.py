@@ -5,7 +5,7 @@ class Solution:
         right = n-1
 
         while left <= right:
-            mid = left+((right-left)//2)
+            mid = (left+right)//2
             if nums[mid] > target:
                 right = mid-1
             elif nums[mid] < target:
