@@ -1,29 +1,19 @@
 class Solution:
-    #BINARY SEARCH
+    #BINARY SEARCH (One Pass)
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         rows, cols = len(matrix), len(matrix[0])
 
-        top, bottom = 0, rows-1
-        while top <= bottom:
-            row = (top + bottom)//2
-            if target > matrix[row][-1]:
-                top = row + 1
-            elif target < matrix[row][0]:
-                bottom = row - 1
-            else:
-                break
-        if top > bottom:
-            return False
-
-        left, right = 0, cols-1
+        left, right = 0, rows * cols - 1
         while left <= right:
             mid = (left + right)//2
-            if target > matrix[row][mid]:
+            row, col = mid//cols, mid%cols
+            if target > matrix[row][col]:
                 left = mid + 1
-            elif target < matrix[row][mid]:
+            elif target < matrix[row][col]:
                 right = mid - 1
             else:
                 return True
         return False
-#TIME-COMPLEXITY: O(m+n)
+
+#TIME-COMPLEXITY: O(logm + logn)
 #SPACE-COMPLEXITY: O(1)
