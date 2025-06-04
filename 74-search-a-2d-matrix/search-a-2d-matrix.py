@@ -1,14 +1,27 @@
 class Solution:
-    #STAIRCASE SEARCH
+    #BINARY SEARCH
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        m, n = len(matrix), len(matrix[0])
-        r, c = 0, n-1
+        rows, cols = len(matrix), len(matrix[0])
 
-        while r < m and c >= 0:
-            if matrix[r][c] > target:
-                c -= 1
-            elif matrix[r][c] < target:
-                r += 1
+        top, bottom = 0, rows-1
+        while top <= bottom:
+            row = (top + bottom)//2
+            if target > matrix[row][-1]:
+                top = row + 1
+            elif target < matrix[row][0]:
+                bottom = row - 1
+            else:
+                break
+        if top > bottom:
+            return False
+
+        left, right = 0, cols-1
+        while left <= right:
+            mid = (left + right)//2
+            if target > matrix[row][mid]:
+                left = mid + 1
+            elif target < matrix[row][mid]:
+                right = mid - 1
             else:
                 return True
         return False
