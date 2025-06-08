@@ -1,21 +1,36 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        low = 0
-        high = len(nums) - 1
+        left = 0
+        right = len(nums) - 1
 
-        while(low <= high):
-            mid = (low + high) // 2
-            if nums[mid] == target:
-                return mid
-
-            if nums[low] <= nums[mid]:
-                if nums[low] <= target < nums[mid]:
-                    high = mid - 1
-                else:
-                    low = mid + 1
+        while left < right:
+            mid = (left+right)//2
+            if nums[mid] > nums[right]:
+                left = mid + 1
             else:
-                if nums[mid] < target <= nums[high]:
-                    low = mid + 1
+                right = mid
+
+        pivot = left
+
+        def binary_search(left: int, right: int):
+            while left <= right:
+                mid = (left+right)//2
+                if nums[mid] == target:
+                    return mid
+                elif nums[mid] > target:
+                    right = mid - 1
                 else:
-                    high = mid - 1
-        return -1
+                    left = mid + 1
+            return -1
+
+        result = binary_search(0, pivot-1)
+        if result != -1:
+            return result
+        return binary_search(pivot, len(nums)-1) 
+
+
+
+
+
+
+    
