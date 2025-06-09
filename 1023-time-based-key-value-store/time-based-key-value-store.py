@@ -1,26 +1,22 @@
 class TimeMap:
 
     def __init__(self):
-        self.keystore = {}
+        self.keystore = defaultdict(SortedDict)   # key : list of [val, timestamp]
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        if key not in self.keystore:
-            self.keystore[key] = []
-        self.keystore[key].append([value, timestamp])
+        self.keystore[key][timestamp] = value
 
     def get(self, key: str, timestamp: int) -> str:
-        res = ""
-        store = self.keystore.get(key, []) 
-        left, right = 0, len(store)-1
+        if key not in self.keystore:
+            return ""
+        
+        timestamps = self.keystore[key]
+        idx = self.keystore[key].bisect_right(timestamp) - 1
 
-        while left <= right:
-            mid = (left+right)//2
-            if store[mid][1] <= timestamp:
-                res = store[mid][0]
-                left = mid + 1
-            else:
-                right = mid - 1
-        return res
+        if idx >= 0:
+            closest_time = timestamps.iloc[idx]
+            return timestamps[closest_time]
+        return "" 
             
 
 
