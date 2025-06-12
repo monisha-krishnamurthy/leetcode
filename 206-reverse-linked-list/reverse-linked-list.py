@@ -8,10 +8,15 @@ class Solution:
         if head is None:
             return None
 
-        newHead = head
-        if head.next:
-            newHead = self.reverseList(head.next) 
-            front = head.next
-            front.next = head
-            head.next = None
-        return newHead
+        stack = []
+        current = head
+        while current:
+            stack.append(current.val)
+            current = current.next
+        
+        current = head
+        while current and stack:
+            newData = stack.pop()
+            current.val = newData
+            current = current.next 
+        return head
