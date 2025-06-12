@@ -8,13 +8,10 @@ class Solution:
         if head is None:
             return None
 
-        current = head
-        previous_node = None
-        next_node = None
-        while current:
-            next_node = current.next
-            current.next = previous_node
-            previous_node = current
-            current = next_node
-        return previous_node
-
+        newHead = head
+        if head.next:
+            newHead = self.reverseList(head.next) 
+            front = head.next
+            front.next = head
+            head.next = None
+        return newHead
