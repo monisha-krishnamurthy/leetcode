@@ -16,6 +16,15 @@ class Solution:
                 list2 = list2.next
             node = node.next
 
-        node.next = list1 or list2
+        while list1:
+            node.next = ListNode(list1.val)
+            node = node.next
+            list1 = list1.next
+
+        while list2:
+            node.next = ListNode(list2.val)
+            node = node.next
+            list2 = list2.next
+
         return dummy.next
 
