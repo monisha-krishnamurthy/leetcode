@@ -5,31 +5,26 @@
 #         self.next = next
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        """
-        Do not return anything, modify head in-place instead.
-        """
-        slow, fast = head, head.next
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        second = slow.next
-        slow.next = None
 
-        prev = None
-        while second:
-            temp = second.next
-            second.next = prev
-            prev = second
-            second = temp
+        def recursive(root: ListNode, curr: ListNode) -> ListNode:
+            if curr is None:
+                return root
 
-        first, second = head, prev 
-        while second:
-            temp1, temp2 = first.next, second.next
-            first.next = second
-            second.next = temp1
-            first , second = temp1, temp2
+            root = recursive(root, curr.next)
+            if root is None:
+                return None
 
-        
+            temp = None
+            if root == curr or root.next == curr:
+                curr.next = None
+            else:
+                temp = root.next
+                root.next = curr
+                curr.next = temp 
+            return temp
+
+        recursive(head, head.next)
+
 
 
         
