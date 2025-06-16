@@ -4,15 +4,18 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def recursive(self, head: ListNode, n: list) -> ListNode:
-        if head is None:
-            return None
-        
-        head.next = self.recursive(head.next, n)
-        n[0] -= 1
-        if n[0] == 0:
-            return head.next
-        return head
-
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        return self.recursive(head, [n])
+        dummy = ListNode(0, head)
+        left = dummy
+        right = head
+
+        while n > 0:
+            right = right.next
+            n -= 1
+
+        while right:
+            left = left.next
+            right = right.next
+
+        left.next = left.next.next
+        return dummy.next
