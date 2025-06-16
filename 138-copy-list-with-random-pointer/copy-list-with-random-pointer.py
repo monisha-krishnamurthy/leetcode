@@ -9,7 +9,7 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        oldToCopy = {None : None}
+        oldToCopy = {None : None} #DOUBT
 
         current = head
         while current:
