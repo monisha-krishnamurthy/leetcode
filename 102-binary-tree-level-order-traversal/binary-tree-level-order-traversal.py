@@ -4,36 +4,29 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
-    def height(self, node: Optional[TreeNode]) -> int:
-        if node is None:
-            return 0
-
-        lh = self.height(node.left)
-        rh = self.height(node.right)
-        return max(lh, rh) + 1
-
-    def printKNodes(self, node: Optional[TreeNode], h: int, level: List[TreeNode]) -> List[TreeNode]:
-        if node is None:
-            return
-        
-        if h == 0:
-            level.append(node.val)
-        else:
-            self.printKNodes(node.left, h-1, level)
-            self.printKNodes(node.right, h-1, level)
-        return level 
-
+class Solution: 
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        heightOfTree = self.height(root)
-        res = []
+        if root is None:
+            return []
+            
+        q = deque()
+        q.append(root)
 
-        for i in range(heightOfTree):
+        res = []
+        while q:
+            level_size = len(q)
             level = []
-            self.printKNodes(root, i, level)
+
+            for _ in range(level_size):
+                node = q.popleft()
+                level.append(node.val)
+
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right) 
             res.append(level)
         return res
-
 
 
     
