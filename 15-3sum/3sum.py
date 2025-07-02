@@ -1,28 +1,44 @@
 class Solution:
-    # HASH-MAP SOLUTION 
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        nums.sort()
-        res = []
+    def threeSum(self, array: List[int]) -> List[List[int]]:
+        #sort the given array
+        array.sort()
+        print(array)
+        #build a mapping of values to count
+        mapping = defaultdict(int)
+        for val in array:
+            mapping[val] += 1
+        #initialise the result array
+        result = []
 
-        for i, a in enumerate(nums):
-            if i > 0 and a == nums[i - 1]:
+        #scan through array for the first number
+        for i in range(len(array) - 2):
+            #make sure the number is not the same as the previous
+            if i > 0 and array[i] == array[i-1]:
                 continue
+            #decrement count of array[i] in mapping
+            mapping[array[i]] -= 1
 
-            l, r = i + 1, len(nums)-1
-            while l < r:
-                threeSum = a + nums[l] + nums[r] 
-                if threeSum > 0:
-                    r -= 1
-                elif threeSum < 0:
-                    l += 1
-                else:
-                    res.append([a, nums[l], nums[r]])
-                    l += 1
-                    while nums[l] == nums[l - 1] and l < r:
-                        l += 1
-        return res
-# TIME-COMPLEXITY: O(nlogN) + O(n^2) = O(n^2)
-# SPACE-COMPLEXITY: O(m) for output list 
+            #looking for the second number
+            for j in range(i+1, len(array) -1):
+                #make sure the number is not the same as the previous
+                if j > i+1 and array[j] == array[j-1]:
+                    continue
+                #decrement count of array[j] in mapping
+                mapping[array[j]] -= 1
+                #find the complement in set 
+                complement = 0 - array[i] - array[j]
+                #complement should not be less than array[i] and array[j]
+                if complement < array[i] or complement < array[j]:
+                    mapping[array[j]] += 1
+                    continue
+                if mapping[complement] > 0:
+                    #found 1 answer set
+                    #add to the list
+                    result.append([array[i], array[j], complement])
+                mapping[array[j]] += 1 
+                #return result after finding all combinations
+        return result
+
 
 
 
