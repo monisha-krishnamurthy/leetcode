@@ -4,21 +4,18 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
 
-        good_nodes = 0
-        def recursive(root, max_value):
-            nonlocal good_nodes
-            if root is None:
-                return 
-            
-            if root.val >= max_value:
-                max_value = root.val
-                good_nodes +=1
- 
-            recursive(root.left, max_value)
-            recursive(root.right, max_value)
+        def dfs(node, maxVal):
+            if not node:
+                return 0
 
-        recursive(root, float('-inf'))
-        return good_nodes
+            res = 1 if node.val >= maxVal else 0
+            maxVal = max(maxVal, node.val)
+            res += dfs(node.left, maxVal)
+            res += dfs(node.right, maxVal)
+            return res
+
+        return dfs(root, root.val)
