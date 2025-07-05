@@ -7,15 +7,16 @@
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         
-        def valid(node: Optional[TreeNode], left: int, right: int) -> bool:
+        def valid(node: Optional[TreeNode], lower: int, upper: int) -> bool:
             if node is None:
                 return True
 
-            if not(left < node.val and right > node.val):
+            if not(lower < node.val < upper):
                 return False 
 
-            return (valid(node.left, left, node.val) and
-                    valid(node.right, node.val, right))
+            return (valid(node.left, lower, node.val) and
+                    valid(node.right, node.val, upper))
 
         return valid(root, float("-inf"), float("inf")) 
-        
+
+    
