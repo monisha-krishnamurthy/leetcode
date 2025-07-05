@@ -5,10 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        if not root:
-            return True 
-            
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:   
         q = deque()
         q.append([root, float("-inf"), float("inf")])
 
