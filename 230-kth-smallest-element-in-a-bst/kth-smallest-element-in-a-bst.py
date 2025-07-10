@@ -9,15 +9,13 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         arr = []
 
-        def dfs(node, arr):
+        def dfs(node):
             if node is None:
                 return None
 
+            dfs(node.left)
             arr.append(node.val)
+            dfs(node.right)
 
-            dfs(node.left, arr)
-            dfs(node.right, arr)
-        
-        dfs(root, arr)
-        arr.sort()
+        dfs(root)
         return arr[k-1]
