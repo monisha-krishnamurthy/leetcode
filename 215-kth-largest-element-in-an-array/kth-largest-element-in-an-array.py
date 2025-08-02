@@ -3,9 +3,8 @@ class Solution:
         minHeap = []
         for num in nums:
             heapq.heappush(minHeap, num)
-
-        heapq.heapify(minHeap)
-        count = len(minHeap) - k
-        for i in range(count):
-            heapq.heappop(minHeap)
+            if len(minHeap) > k:
+                heapq.heappop(minHeap) 
         return heapq.heappop(minHeap)
+
+     
