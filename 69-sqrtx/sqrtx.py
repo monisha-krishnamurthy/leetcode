@@ -7,12 +7,12 @@ class Solution:
         hi = x
 
         #loop through the search domain
-        while lo < hi:
+        while lo < hi - 1:
             sqrt = (lo + hi)//2
             if sqrt*sqrt == x:
                 return sqrt
             elif sqrt*sqrt < x:
-                lo = sqrt + 1 
+                lo = sqrt
             else:
                 hi = sqrt
-        return lo - 1
+        return lo
