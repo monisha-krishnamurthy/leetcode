@@ -12,10 +12,10 @@ class Solution:
 
         while lo < hi:
             mid = (lo + hi)//2
-            if isFound(mid):
-                hi = mid
-            else:
+            if isFound(mid)== False:
                 lo = mid + 1
+            else:
+                hi = mid
         return lo
 
 
