@@ -9,10 +9,10 @@ class Solution:
         #loop through the search domain
         while lo < hi:
             sqrt = (lo + hi)//2
-            if sqrt*sqrt <= x and (sqrt+1)*(sqrt+1) > x:
-                return sqrt 
-            elif sqrt*sqrt > x:
+            if sqrt*sqrt == x:
+                return sqrt
+            elif sqrt*sqrt < x:
+                lo = sqrt + 1 
+            else:
                 hi = sqrt
-            elif sqrt*sqrt<x:
-                lo = sqrt + 1
         return lo - 1
