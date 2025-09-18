@@ -17,7 +17,7 @@ class Solution:
                         noOfBouquets += 1
                         flowers = 0
                     index += 1
-                    continue
+                    # continue
                 else:
                     flowers = 0
                     index += 1
