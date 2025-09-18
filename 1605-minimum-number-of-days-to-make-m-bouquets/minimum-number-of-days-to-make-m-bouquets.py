@@ -7,17 +7,25 @@ class Solution:
         hi = max(bloomDay) 
             
         def canMakeMBouquets(mid):
-            bouquets = 0
+            noOfBouquets = 0
             flowers = 0
-            for day in bloomDay:
-                if day <= mid:
-                    flowers += 1
+            index = 0
+            while noOfBouquets < m and index < len(bloomDay):
+                if bloomDay[index] <= mid:
+                    flowers +=1
                     if flowers == k:
-                        bouquets += 1
+                        noOfBouquets += 1
                         flowers = 0
+                    index += 1
+                    continue
                 else:
                     flowers = 0
-            return bouquets >= m
+                    index += 1
+            if noOfBouquets >= m:
+                return True
+            else:
+                return False
+
 
         while lo < hi:
             mid = (lo+hi)//2
