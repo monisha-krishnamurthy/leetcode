@@ -3,7 +3,7 @@ class Solution:
         if digits == "":
             return []
 
-        res = []
+        res = [""]
         digits_map = {"2":["a","b","c"], 
                     "3":["d","e","f"], 
                     "4":["g","h","i"], 
@@ -13,13 +13,12 @@ class Solution:
                     "8":["t","u","v"], 
                     "9":["w","x","y","z"]}
         
-        def backtrack(i, curStr):
-            if len(curStr) == len(digits):
-                res.append(curStr)
-                return
-
-            for c in digits_map[digits[i]]:
-                backtrack(i+1, curStr+c)
-
-        backtrack(0,"")
+        for digit in digits:
+            temp = []
+            for curStr in res:
+                for ch in digits_map[digit]:
+                    temp.append(curStr + ch)
+            res = temp 
         return res
+
+
