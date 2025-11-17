@@ -9,10 +9,8 @@ class Node:
 from typing import Optional
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
-        if not node:
-            return None
-
         oldToNew = {}
+        
         def clone_dfs(node):
             copy = Node(node.val)
             oldToNew[node] = copy
