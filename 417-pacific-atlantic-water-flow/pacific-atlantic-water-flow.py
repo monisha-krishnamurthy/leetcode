@@ -1,34 +1,40 @@
 class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         ROWS, COLS = len(heights), len(heights[0])
-        pacific, atlantic = set(), set()
+        pacific = [[False] * COLS for _ in range(ROWS)]
+        atlantic = [[False] * COLS for _ in range(ROWS)]
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 
-        def dfs(r, c, visit, prevHeight):
-            if ((r,c) in visit or r<0 or c<0 or r>=ROWS or c >=COLS or heights[r][c] < prevHeight):
-                return
-
-            visit.add((r,c))
-            dfs(r+1, c, visit, heights[r][c])
-            dfs(r-1, c, visit, heights[r][c])
-            dfs(r, c+1, visit, heights[r][c])
-            dfs(r, c-1, visit, heights[r][c])
-
+        def bfs(source, visit):
+            q = deque(source)
+            while q:
+                r,c = q.popleft()
+                visit[r][c] = True
+                for dr, dc in directions:
+                    nr, nc = dr+r, dc+c
+                    if (0 <= nr < ROWS and 0 <= nc < COLS and
+                        not visit[nr][nc] and
+                        heights[nr][nc] >= heights[r][c]
+                    ):
+                        q.append((nr,nc))
         
+        pacSource = []
+        atlSource = []
         for c in range(COLS):
-            dfs(0, c, pacific, heights[0][c])
-            dfs(ROWS-1, c, atlantic, heights[ROWS-1][c])
+            pacSource.append((0,c))
+            atlSource.append((ROWS-1, c))
 
         for r in range(ROWS):
-            dfs(r, 0, pacific, heights[r][0])
-            dfs(r, COLS-1, atlantic, heights[r][COLS-1])
+            pacSource.append((r, 0))
+            atlSource.append((r, COLS-1))
+
+        bfs(pacSource, pacific)
+        bfs(atlSource, atlantic)
 
         res = []
         for r in range(ROWS):
             for c in range(COLS):
-                if (r,c) in pacific and (r,c) in atlantic:
+                if pacific[r][c] and atlantic[r][c]:
                     res.append([r,c])
 
         return res
-
-
-     
