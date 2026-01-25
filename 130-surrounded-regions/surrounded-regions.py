@@ -24,7 +24,8 @@ class Solution:
 
         for r in range(ROWS):
             for c in range(COLS):
+                if board[r][c] == 'O':
+                    board[r][c] = 'X'
                 if board[r][c] == 'T':
                     board[r][c] = 'O'
-                elif board[r][c] == 'O':
-                    board[r][c] = 'X'
+                
