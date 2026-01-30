@@ -11,3 +11,4 @@ class Solution:
             else:
                 j -= 1
         return max_water
+        
