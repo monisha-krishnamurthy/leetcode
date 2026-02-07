@@ -1,28 +1,31 @@
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
         n = len(edges)
-        adj = [[] for _ in range(n+1)]
-        indegree = [0] * (n+1)
+        parent = [i for i in range(n+1)]
+        rank = [1] * (n+1)
+        
+        def find(u):
+            while u != parent[u]:
+                parent[u] = parent[parent[u]]
+                u = parent[u]
+            return u
+
+        def union(u,v):
+            pu = find(u)
+            pv = find(v)
+            if pu == pv:
+                return False
+
+            if rank[pu] > rank[pv]:
+                parent[pu] = pv
+                rank[pv] += rank[pu]
+            else:
+                parent[pv] = pu
+                rank[pu] += rank[pv]
+            return True
+
         for u,v in edges:
-            adj[u].append(v)
-            adj[v].append(u)
-            indegree[u] += 1
-            indegree[v] += 1
-
-        q = deque()
-        for i in range(1, n+1):
-            if indegree[i] == 1:
-                q.append(i)
-
-        while q:
-            node = q.popleft()
-            indegree[node] -= 1
-            for neigh in adj[node]:
-                indegree[neigh] -= 1
-                if indegree[neigh] == 1:
-                    q.append(neigh)
-
-        for u,v in reversed(edges):
-            if indegree[u] == 2 and indegree[v]:
+            if not union(u,v):
                 return [u,v]
-        return []
+
+
