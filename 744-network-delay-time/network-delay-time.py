@@ -1,22 +1,22 @@
 class Solution:
+    #flyod warshall algo
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        adj_list = defaultdict(list)
+        inf = float("inf")
+        mat = [[inf] * n for _ in range(n)]
+
         for u,v,w in times:
-            adj_list[u].append((v,w))
+            mat[u-1][v-1] = w
+        for i in range(n):
+            mat[i][i] = 0
 
-        dist = {node : float("inf") for node in range(1, n+1)}
+        for mid in range(n):
+            for i in range(n):
+                for j in range(n):
+                    mat[i][j] = min(mat[i][j], mat[i][mid] + mat[mid][j])
 
-        def dfs(node, time):
-            if time >= dist[node]:
-                return
-            
-            dist[node] = time
-            for neigh, w in adj_list[node]:
-                dfs(neigh, time + w)
+        res = max(mat[k-1])
+        return res if res < inf else -1
 
-        dfs(k, 0)
-        res = max(dist.values())
-        return res if res < float("inf") else -1
 
 
 
