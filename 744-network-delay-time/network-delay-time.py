@@ -1,15 +1,22 @@
 class Solution:
-    #belman ford algo
+    #djikstra's algo
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        dist = [float("inf")]*n
-        dist[k-1] = 0
+        adj = defaultdict(list)
+        for u,v,w in times:
+            adj[u].append((v,w))
 
-        for _ in range(n):
-            for u,v,w in times:
-                if dist[u-1] + w < dist[v-1]:
-                    dist[v-1] = dist[u-1] + w
-        res = max(dist)
-        return res if res < float("inf") else -1
+        minHeap = [(0,k)]
+        visit = set()
+        res = 0
+        while minHeap:
+            weight, node = heapq.heappop(minHeap)
+            if node in visit:
+                continue
+            visit.add(node)
+            res = weight
 
-
+            for n1, w1 in adj[node]:
+                if n1 not in visit:
+                    heapq.heappush(minHeap, (w1+weight, n1))
+        return res if len(visit) == n else -1
 
