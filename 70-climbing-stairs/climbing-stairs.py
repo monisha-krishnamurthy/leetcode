@@ -1,4 +1,5 @@
 class Solution:
+    #TOP DOWN APPROACH i.e., MEMOIZATION
     def climbStairs(self, n: int) -> int:
         cache = [-1]*n
         def dfs(i):
