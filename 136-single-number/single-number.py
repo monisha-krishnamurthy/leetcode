@@ -1,6 +1,8 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        single = 0
+        mapping = dict()
         for num in nums:
-            single ^= num
-        return single 
+            mapping[num] = mapping.get(num, 0) + 1
+        for key,val in mapping.items():
+            if val == 1:
+                return key
