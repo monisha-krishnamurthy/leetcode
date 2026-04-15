@@ -1,19 +1,19 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         n = len(nums)
-        prefix = [1]*n
-        suffix = [1]*n
         res = [1]*n
 
+        prefix = 1
         for i in range(1,n):
-            prefix[i] = prefix[i-1]*nums[i-1]
-        print(prefix)
+            prefix = prefix * nums[i-1]
+            res[i] *= prefix
+        print(res)
 
+        suffix = 1
         for j in range(n-2, -1, -1):
-            suffix[j] = suffix[j+1] * nums[j+1]
-        print(suffix)
+            suffix = suffix * nums[j+1]
+            res[j] *= suffix 
+        print(res)
 
-        for k in range(0,n):
-            res[k] = prefix[k] * suffix[k]
         return res
 
