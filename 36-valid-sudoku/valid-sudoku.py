@@ -1,23 +1,34 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        # using hash set (one-pass)
-        row = defaultdict(set)
-        col = defaultdict(set)
-        square = defaultdict(set)
-
-        for r in range(9):
-            for c in range(9):
-                if board[r][c] == ".":
+        
+        for i in range(len(board)):
+            setI = set()
+            for j in range(len(board[0])):
+                if board[i][j] == ".":
                     continue
-                if (board[r][c] in row[r]  
-                    or board[r][c] in col[c]  
-                    or board[r][c] in square[(r//3), (c//3)]):
+                if board[i][j] in setI:
                     return False
-                
-                row[r].add(board[r][c])
-                col[c].add(board[r][c])
-                square[(r//3,c//3)].add(board[r][c])
-        return True
-# TIME COMPLEXITY: O(n^2)
-# SPACE COMPLEXITY: O(n^2)
+                setI.add(board[i][j])
 
+        
+        for i in range(len(board[0])):
+            setJ = set()
+            for j in range(len(board)):
+                if board[j][i] == ".":
+                    continue
+                if board[j][i] in setJ:
+                    return False
+                setJ.add(board[j][i])
+
+        for square in range(9):
+            set3 = set()
+            for i in range(3):
+                for j in range(3):
+                    row = (square//3)*3+i
+                    col = (square%3)*3+j
+                    if board[row][col] == ".":
+                        continue
+                    if board[row][col] in set3:
+                        return False
+                    set3.add(board[row][col])
+        return True
