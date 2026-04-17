@@ -7,11 +7,10 @@ class Solution:
             if 97 <= ord(ch) <= 122 or 48 <= ord(ch) <= 57:
                 string += ch
 
-        iter = list(string)
         left = 0 
-        right = len(iter)-1
+        right = len(string)-1
         while left<right:
-            if iter[left] != iter[right]:
+            if string[left] != string[right]:
                 return False
             left += 1
             right -= 1
