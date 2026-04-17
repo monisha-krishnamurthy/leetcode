@@ -1,18 +1,18 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        l, r = 0, len(s)-1
+        s.lower()
 
-        while l < r:
-            while l < r and not self.alphaNum(s[l]):
-                l += 1
-            while l < r and not self.alphaNum(s[r]):
-                r -= 1
-            if s[l].lower() != s[r].lower():
+        string = ""
+        for ch in s.lower():
+            if 97 <= ord(ch) <= 122 or 48 <= ord(ch) <= 57:
+                string += ch
+
+        iter = list(string)
+        left = 0 
+        right = len(iter)-1
+        while left<right:
+            if iter[left] != iter[right]:
                 return False
-            l, r = l + 1, r - 1
+            left += 1
+            right -= 1
         return True
-
-    def alphaNum(self, ch):
-        return (ord('A') <= ord(ch) <= ord('Z') or
-                ord('a') <= ord(ch) <= ord('z') or
-                ord('0') <= ord(ch) <= ord('9') )
