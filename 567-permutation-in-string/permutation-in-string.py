@@ -1,28 +1,18 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        freq_s1 = defaultdict(int)
+        mapping = [0]*26
         for ch in s1:
-            freq_s1[ch] += 1
+            mapping[ord(ch) - ord('a')] += 1
 
-        k = len(s1)
-        substring = s2[0 : k]
-        for ch in substring:
-            if ch in freq_s1:
-                freq_s1[ch] -= 1
-
-        for r in range(len(s1), len(s2)):
-            if all(val == 0 for val in freq_s1.values()):
+        length = len(s1)
+        i = 0
+        while i <= len(s2)-length:
+            charset = [0]*26
+            substring = s2[i:i+length]
+            for k in range(len(substring)):
+                charset[ord(substring[k]) -  ord('a')] += 1
+            if charset == mapping:
                 return True
-            if s2[r - k] in freq_s1:
-                freq_s1[s2[r - k]] += 1
-            if s2[r] in freq_s1:
-                freq_s1[s2[r]] -= 1
-        if all(val == 0 for val in freq_s1.values()):
-            return True
+            else:
+                i += 1
         return False
-            
-
-        
-        
-        
-        
