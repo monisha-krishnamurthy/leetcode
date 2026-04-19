@@ -5,14 +5,20 @@ class Solution:
             mapping[ord(ch) - ord('a')] += 1
 
         length = len(s1)
+        k = 0
+        charset = [0]*26
+        substring = s2[k:k+length]
+        for m in range(len(substring)):
+            charset[ord(substring[m]) -  ord('a')] += 1
+
+        if charset == mapping:
+            return True
+
         i = 0
-        while i <= len(s2)-length:
-            charset = [0]*26
-            substring = s2[i:i+length]
-            for k in range(len(substring)):
-                charset[ord(substring[k]) -  ord('a')] += 1
+        for j in range(length, len(s2)):
+            charset[ord(s2[i]) - ord('a')] -= 1
+            charset[ord(s2[j]) - ord('a')] += 1
+            i += 1
             if charset == mapping:
                 return True
-            else:
-                i += 1
         return False
