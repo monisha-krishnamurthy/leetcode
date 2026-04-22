@@ -18,4 +18,4 @@ class Solution:
                 left = mid + 1
             elif guess(mid) == 0:
                 return mid
-        return 1
+        return 0
