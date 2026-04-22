@@ -1,23 +1,13 @@
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
-        lo = 0
-        hi = len(nums)
+        left, right = 0, len(nums)
 
-        def isFound(mid):
-            if nums[mid] >= target:
-                return True
-            else:
-                return False
-
-
-        while lo < hi:
-            mid = (lo + hi)//2
-            if isFound(mid)== False:
-                lo = mid + 1
-            else:
-                hi = mid
-        return lo
-
-
-
-        
+        while left < right:
+            mid = (left+right)//2
+            if nums[mid] < target:
+                left = mid + 1
+            elif nums[mid] > target:
+                right = mid 
+            elif nums[mid] == target:
+                return mid
+        return left
