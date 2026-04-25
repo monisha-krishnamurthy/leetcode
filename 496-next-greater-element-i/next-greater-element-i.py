@@ -1,17 +1,17 @@
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        #res = [-1]*len(nums2)
-        mapping = defaultdict(lambda: -1)
+        mapping = defaultdict(int)
+        output = [0]*len(nums1)
         stack = []
-        for i in range(len(nums2)):
-            while stack and nums2[i] > nums2[stack[-1]]:
-                #res[stack[-1]] = nums2[i]
-                mapping[nums2[stack[-1]]] = nums2[i]
-                stack.pop()
-            stack.append(i)
-        
-        output = []
-        for num in nums1:
-            output.append(mapping[num])
+        for num in nums2:
+            while stack and num > stack[-1]:
+                mapping[stack[-1]] = num
+                stack.pop() 
+            stack.append(num)
 
+        for i,num in enumerate(nums1):
+            if num in mapping:
+                output[i] = mapping[num]
+            else:
+                output[i] = -1
         return output
