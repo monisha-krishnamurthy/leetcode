@@ -14,17 +14,13 @@ class Solution:
         output = []
 
         while q:
-            out = []
-            for _ in range(len(q)):
+            length = len(q)
+            for i in range(length):
                 node = q.popleft()
-                out.append(node.val)
+                if i == length - 1 :
+                    output.append(node.val)
                 if node.left:
                     q.append(node.left)
                 if node.right:
                     q.append(node.right)
-            output.append(out)
-        
-        res = []
-        for arr in output:
-            res.append(arr[-1])
-        return res
+        return output
