@@ -1,7 +1,10 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        mapping = defaultdict(int)
+        freq_mapping = defaultdict(int)
         for num in nums:
-            mapping[num] += 1
-        sorted_dict = sorted(mapping.items(), key=lambda item: item[1], reverse = True)
-        return [key for key, val in sorted_dict[:k]]
+            freq_mapping[num] += 1
+        sorted_list = sorted(freq_mapping.items(), key=lambda x:x[1], reverse = True) 
+        output = []
+        for i in range(k):
+            output.append(sorted_list[i][0])
+        return output
