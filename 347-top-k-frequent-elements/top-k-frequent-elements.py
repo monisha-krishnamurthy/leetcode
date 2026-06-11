@@ -3,8 +3,16 @@ class Solution:
         freq_mapping = defaultdict(int)
         for num in nums:
             freq_mapping[num] += 1
-        sorted_list = sorted(freq_mapping.items(), key=lambda x:x[1], reverse = True) 
+
+        heap = list()
+        for key, val in freq_mapping.items():
+            heapq.heappush(heap, (-val, key))
+
         output = []
-        for i in range(k):
-            output.append(sorted_list[i][0])
+        while k > 0:
+            freq, num = heapq.heappop(heap)
+            output.append(num)
+            k -=1
         return output
+
+
