@@ -1,17 +1,20 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        s.lower()
+        s = s.lower()
+        inter = []
+        for char in s:
+            if 97 <= ord(char) <= 122 or 48 <= ord(char) <= 57:
+                inter.append(char)
+        string = "".join(inter)
 
-        string = ""
-        for ch in s.lower():
-            if 97 <= ord(ch) <= 122 or 48 <= ord(ch) <= 57:
-                string += ch
+        string = list(string)
+        if len(string) == 1:
+            return True
 
-        left = 0 
-        right = len(string)-1
-        while left<right:
-            if string[left] != string[right]:
+        i, j = 0, len(string)-1
+        while i <= j:        
+            if string[i] != string[j]:
                 return False
-            left += 1
-            right -= 1
+            i += 1
+            j -= 1
         return True
